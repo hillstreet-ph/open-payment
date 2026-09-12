@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-release-configuration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON configuration
+        run: |
+          python -m json.tool release-please-config.json >/dev/null
+          python -m json.tool .release-please-manifest.json >/dev/null
+
+      - name: Validate repository contract
+        run: |
+          test -s README.md
+          test -s docs/AUTONOMOUS_DELIVERY.md
+          test -s .github/workflows/release-please.yml
