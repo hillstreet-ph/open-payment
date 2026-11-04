@@ -62,3 +62,4 @@ Use environment variables or an approved secret manager for runtime credentials.
 ## License
 
 No license has been selected yet. Until a license file is added, copyright remains with the repository owner and no reuse rights are granted automatically.
+Nexus Development Cycle auto-merged by Hermes on 2026-11-04T20:31Z
